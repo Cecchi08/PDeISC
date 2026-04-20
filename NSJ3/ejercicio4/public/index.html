@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto 4 — Nodos y Atributos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="container py-4">
+    <h2 class="mb-1">Proyecto 4</h2>
+    <p class="text-muted mb-4">Creá nodos <code>&lt;a&gt;</code> y modificá sus atributos dinámicamente.</p>
+
+    <div class="row g-4">
+
+      <!-- Panel izquierdo: controles -->
+      <div class="col-12 col-lg-4">
+
+        <!-- Crear nodos -->
+        <div class="card mb-3">
+          <div class="card-header fw-semibold">1 — Crear nodos &lt;a&gt;</div>
+          <div class="card-body d-grid gap-2">
+            <button class="btn btn-primary btn-sm" onclick="crearNodo('google',    'Google',    'https://www.google.com',    '🔍')">+ Google</button>
+            <button class="btn btn-danger  btn-sm" onclick="crearNodo('youtube',   'YouTube',   'https://www.youtube.com',   '▶️')">+ YouTube</button>
+            <button class="btn btn-dark    btn-sm" onclick="crearNodo('github',    'GitHub',    'https://www.github.com',    '🐙')">+ GitHub</button>
+            <button class="btn btn-info    btn-sm" onclick="crearNodo('wikipedia', 'Wikipedia', 'https://www.wikipedia.org', '📖')">+ Wikipedia</button>
+            <button class="btn btn-warning btn-sm" onclick="crearNodo('openai',    'OpenAI',    'https://www.openai.com',    '🤖')">+ OpenAI</button>
+          </div>
+        </div>
+
+        <!-- Modificar atributos -->
+        <div class="card mb-3">
+          <div class="card-header fw-semibold">2 — Modificar atributos</div>
+          <div class="card-body d-grid gap-2">
+            <button class="btn btn-outline-primary   btn-sm" onclick="modificarAtributo('google',    'href', 'https://www.google.com/maps',    'Google Maps')">Google → Maps</button>
+            <button class="btn btn-outline-danger    btn-sm" onclick="modificarAtributo('youtube',   'href', 'https://www.youtube.com/shorts', 'YouTube Shorts')">YouTube → Shorts</button>
+            <button class="btn btn-outline-dark      btn-sm" onclick="modificarAtributo('github',    'href', 'https://gist.github.com',         'GitHub Gist')">GitHub → Gist</button>
+            <button class="btn btn-outline-info      btn-sm" onclick="modificarAtributo('wikipedia', 'href', 'https://es.wikipedia.org',         'Wikipedia ES')">Wikipedia → ES</button>
+            <button class="btn btn-outline-warning   btn-sm" onclick="modificarAtributo('openai',    'href', 'https://chat.openai.com',          'ChatGPT')">OpenAI → ChatGPT</button>
+          </div>
+        </div>
+
+        <!-- Cambiar target -->
+        <div class="card mb-3">
+          <div class="card-header fw-semibold">3 — Cambiar atributo <code>target</code></div>
+          <div class="card-body d-grid gap-2">
+            <button class="btn btn-outline-secondary btn-sm" onclick="cambiarTarget('_blank')">Abrir en nueva pestaña (<code>_blank</code>)</button>
+            <button class="btn btn-outline-secondary btn-sm" onclick="cambiarTarget('_self')">Abrir en misma pestaña (<code>_self</code>)</button>
+          </div>
+        </div>
+
+        <button class="btn btn-outline-danger btn-sm w-100" onclick="limpiarNodos()">🗑 Limpiar todos los nodos</button>
+      </div>
+
+      <!-- Panel central: nodos creados -->
+      <div class="col-12 col-lg-4">
+        <div class="card h-100">
+          <div class="card-header fw-semibold d-flex justify-content-between">
+            <span>Nodos creados</span>
+            <span id="contador-nodos" class="badge bg-secondary">0</span>
+          </div>
+          <div class="card-body">
+            <div id="contenedor-nodos" class="d-flex flex-column gap-2">
+              <p class="text-muted small text-center mt-3">Todavía no creaste ningún nodo.<br>Usá los botones de la izquierda.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel derecho: log de cambios -->
+      <div class="col-12 col-lg-4">
+        <div class="card h-100">
+          <div class="card-header fw-semibold d-flex justify-content-between">
+            <span>Log de cambios</span>
+            <button class="btn btn-outline-secondary btn-sm py-0 px-2" onclick="limpiarLog()">limpiar</button>
+          </div>
+          <div class="card-body p-0">
+            <ul id="log-cambios" class="list-group list-group-flush log-lista"></ul>
+            <p id="log-vacio" class="text-muted small text-center p-3">Sin cambios registrados.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>

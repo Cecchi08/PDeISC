@@ -1,0 +1,54 @@
+.nodo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #212529;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+  
+  .nodo-link:hover {
+    background: #e9ecef;
+    border-color: #0d6efd;
+    color: #0d6efd;
+    transform: translateX(4px);
+  }
+  
+  .nodo-link .nodo-url {
+    font-size: 0.72rem;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+  
+  .nodo-link.modificado {
+    border-color: #198754;
+    background: #d1e7dd;
+    animation: flash-green 0.6s ease;
+  }
+  
+  @keyframes flash-green {
+    0%   { background: #a3cfbb; }
+    100% { background: #d1e7dd; }
+  }
+  
+  .log-lista {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .log-item {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .log-item .log-antes  { color: #dc3545; text-decoration: line-through; }
+  .log-item .log-despues { color: #198754; font-weight: 600; }

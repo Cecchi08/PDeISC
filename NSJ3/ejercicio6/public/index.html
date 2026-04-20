@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto 6 — Formulario de Registro</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <div class="container py-4">
+    <h2 class="mb-1">Proyecto 6</h2>
+    <p class="text-muted mb-4">Completá el formulario y mirá el resultado dinámicamente en la misma página.</p>
+
+    <div class="row g-4">
+
+      <!-- Formulario -->
+      <div class="col-12 col-lg-6">
+        <div class="card">
+          <div class="card-header fw-semibold">📋 Formulario de Registro</div>
+          <div class="card-body">
+            <form id="form-registro" novalidate>
+
+              <!-- Nombre -->
+              <div class="mb-3">
+                <label class="form-label" for="inp-nombre">Nombre completo <span class="text-danger">*</span></label>
+                <input type="text" id="inp-nombre" class="form-control" placeholder="Ej: Juan Pérez" required>
+                <div class="invalid-feedback">Ingresá tu nombre completo.</div>
+              </div>
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label class="form-label" for="inp-email">Email <span class="text-danger">*</span></label>
+                <input type="email" id="inp-email" class="form-control" placeholder="usuario@ejemplo.com" required>
+                <div class="invalid-feedback">Ingresá un email válido.</div>
+              </div>
+
+              <!-- Edad -->
+              <div class="mb-3">
+                <label class="form-label" for="inp-edad">Edad <span class="text-danger">*</span></label>
+                <input type="number" id="inp-edad" class="form-control" min="1" max="120" placeholder="Ej: 25" required>
+                <div class="invalid-feedback">Ingresá una edad válida (1-120).</div>
+              </div>
+
+              <!-- Género (radio) -->
+              <div class="mb-3">
+                <label class="form-label d-block">Género <span class="text-danger">*</span></label>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="genero" id="r-masculino" value="Masculino" required>
+                  <label class="form-check-label" for="r-masculino">Masculino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="genero" id="r-femenino" value="Femenino">
+                  <label class="form-check-label" for="r-femenino">Femenino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="genero" id="r-otro" value="Otro">
+                  <label class="form-check-label" for="r-otro">Otro</label>
+                </div>
+                <div id="genero-error" class="text-danger small d-none">Seleccioná una opción.</div>
+              </div>
+
+              <!-- País (select) -->
+              <div class="mb-3">
+                <label class="form-label" for="inp-pais">País <span class="text-danger">*</span></label>
+                <select id="inp-pais" class="form-select" required>
+                  <option value="">Seleccioná un país...</option>
+                  <option>Argentina</option>
+                  <option>Brasil</option>
+                  <option>Chile</option>
+                  <option>Colombia</option>
+                  <option>México</option>
+                  <option>Uruguay</option>
+                  <option>España</option>
+                  <option>Otro</option>
+                </select>
+                <div class="invalid-feedback">Seleccioná tu país.</div>
+              </div>
+
+              <!-- Intereses (checkbox) -->
+              <div class="mb-3">
+                <label class="form-label d-block">Intereses</label>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="cb-prog"   value="Programación"><label class="form-check-label" for="cb-prog">Programación</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="cb-diseno" value="Diseño"><label class="form-check-label" for="cb-diseno">Diseño</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="cb-data"   value="Data Science"><label class="form-check-label" for="cb-data">Data Science</label></div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="cb-mobile" value="Mobile"><label class="form-check-label" for="cb-mobile">Mobile</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="cb-ia"     value="IA / ML"><label class="form-check-label" for="cb-ia">IA / ML</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="cb-devops" value="DevOps"><label class="form-check-label" for="cb-devops">DevOps</label></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Botones -->
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary flex-grow-1">✅ Registrarme</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="limpiarFormulario()">↺ Limpiar</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultado dinámico -->
+      <div class="col-12 col-lg-6">
+        <!-- Placeholder inicial -->
+        <div id="resultado-placeholder" class="resultado-placeholder text-center py-5 text-muted border rounded h-100 d-flex flex-column align-items-center justify-content-center">
+          <div class="fs-1 mb-3">👤</div>
+          <p class="mb-0">Los datos del registro<br>aparecerán aquí.</p>
+        </div>
+
+        <!-- Tarjeta de resultado (oculta al inicio) -->
+        <div id="resultado-card" class="d-none">
+          <div class="card border-success">
+            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+              <span class="fw-semibold">✅ Registro exitoso</span>
+              <span class="badge bg-white text-success" id="resultado-hora"></span>
+            </div>
+            <div class="card-body">
+
+              <div class="text-center mb-4">
+                <div id="avatar-circle" class="avatar-circle mx-auto mb-2">A</div>
+                <h5 id="res-nombre-grande" class="mb-0">—</h5>
+                <small id="res-email-grande" class="text-muted">—</small>
+              </div>
+
+              <table class="table table-sm mb-3">
+                <tbody>
+                  <tr><th scope="row" class="w-40">Nombre</th><td id="res-nombre">—</td></tr>
+                  <tr><th scope="row">Email</th><td id="res-email">—</td></tr>
+                  <tr><th scope="row">Edad</th><td id="res-edad">—</td></tr>
+                  <tr><th scope="row">Género</th><td id="res-genero">—</td></tr>
+                  <tr><th scope="row">País</th><td id="res-pais">—</td></tr>
+                </tbody>
+              </table>
+
+              <div>
+                <p class="small fw-semibold mb-2">Intereses:</p>
+                <div id="res-intereses" class="d-flex flex-wrap gap-2"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>

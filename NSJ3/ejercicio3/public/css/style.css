@@ -1,0 +1,79 @@
+/* ── Componente 2: tarjetas de color ── */
+.color-card {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 3px solid transparent;
+  
+    /* 🔥 IMPORTANTE */
+    display: inline-block;
+  }
+  
+  /* Hover más prolijo */
+  .color-card:hover {
+    transform: scale(1.2) translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    border-color: rgba(0,0,0,0.2);
+  }
+  
+  /* Caja de info */
+  .color-info-box {
+    border: 1px solid #dee2e6;
+    min-height: 38px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* ── Componente 3: validación ── */
+  .form-control.is-valid-custom {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.15);
+  }
+  
+  .form-control.is-invalid-custom {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.15);
+  }
+  
+  .form-control.is-focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.2);
+  }
+  
+  /* ── Componente 4: preview ── */
+  .preview-card {
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    min-height: 90px;
+    transition: all 0.2s ease;
+  }
+  
+  .preview-card.has-content {
+    background: #fff;
+    border-style: solid;
+    border-color: #0d6efd;
+  }
+  
+  /* ── Componente 5: configurador ── */
+  .estilo-preview {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    font-size: 18px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, font-family 0.2s ease, font-size 0.2s ease;
+  }
+  
+  /* ── Contador ── */
+  #contador-display {
+    font-size: 5rem;
+    line-height: 1;
+    transition: transform 0.1s ease, color 0.3s ease;
+  }
+  
+  #contador-display.bump {
+    transform: scale(1.2);
+  }

@@ -1,0 +1,23 @@
+.placeholder-zona {
+    border-style: dashed !important;
+    background: #f8f9fa;
+  }
+  
+  #zona-insercion .elemento-nuevo {
+    animation: fadeInDown 0.35s ease;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  .cita-bloque {
+    border-left: 4px solid #0d6efd;
+    padding: 12px 20px;
+    background: #f0f4ff;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #343a40;
+  }
