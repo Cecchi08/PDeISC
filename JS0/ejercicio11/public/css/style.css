@@ -1,0 +1,170 @@
+/* ============================= */
+/* RESET */
+/* ============================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* ============================= */
+/* BODY */
+/* ============================= */
+body {
+    min-height: 100vh;
+    background: linear-gradient(120deg, #f0f4ff, #e0f2fe);
+    color: #1e293b;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* ============================= */
+/* CONTENEDOR */
+/* ============================= */
+.contenedor {
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* ============================= */
+/* CARD */
+/* ============================= */
+.card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* ============================= */
+/* TITULOS */
+/* ============================= */
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 32px;
+    color: #2563eb;
+    letter-spacing: -0.5px;
+}
+
+/* ============================= */
+/* BLOQUES GRID */
+/* ============================= */
+.bloques {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 30px;
+}
+
+/* ============================= */
+/* BLOQUE */
+/* ============================= */
+.bloque {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* efecto hover moderno */
+.bloque::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(37,99,235,0.08));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.bloque:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+.bloque:hover::after {
+    opacity: 1;
+}
+
+.bloque h2 {
+    color: #1d4ed8;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.bloque p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #475569;
+}
+
+/* MENSAJE */
+#mensaje {
+    margin-top: 12px;
+    color: #16a34a;
+    font-weight: 600;
+    background: #dcfce7;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* ============================= */
+/* TABLET */
+/* ============================= */
+@media (max-width: 900px) {
+    .bloques {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+@media (max-width: 600px) {
+
+    body {
+        padding: 0;
+        align-items: stretch;
+    }
+
+    .contenedor {
+        max-width: 100%;
+    }
+
+    .card {
+        width: 100%;
+        border-radius: 0;
+        padding: 25px 18px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .bloques {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .bloque {
+        width: 100%;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .bloque h2 {
+        font-size: 17px;
+    }
+
+    .bloque p {
+        font-size: 15px;
+    }
+}
