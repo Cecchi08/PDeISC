@@ -1,0 +1,168 @@
+:root {
+  --bg: #f0f2f8;
+  --bg2: #ffffff;
+  --bg3: #f8f9fc;
+  --accent: #2563eb;
+  --accent2: #16a34a;
+  --accent3: #dc2626;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 2px 16px rgba(37,99,235,0.07);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+}
+
+.navbar {
+  background: var(--bg2);
+  border-bottom: 2px solid var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.navbar-brand { color: var(--text) !important; font-size: 1.1rem; }
+
+.stat-pill {
+  background: var(--accent);
+  color: white;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.card-custom {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.form-label { font-weight: 600; font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+
+.form-control, .form-select {
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--bg3);
+  transition: border-color 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+  background: white;
+}
+
+.btn-agregar {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-agregar:hover { background: #1d4ed8; transform: translateY(-1px); color: white; }
+
+.notif {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  animation: slideIn 0.3s ease;
+}
+
+.notif.success { background: #dcfce7; border: 1px solid #86efac; color: #15803d; }
+.notif.error   { background: #fee2e2; border: 1px solid #fca5a5; color: #dc2626; }
+
+.storage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.storage-item {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.storage-label { font-size: 0.7rem; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+.storage-val { font-size: 1.6rem; font-weight: 800; color: var(--text); line-height: 1.2; }
+.storage-desc { font-size: 0.7rem; color: var(--muted); }
+
+.price-total {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.price-total strong { color: var(--accent); font-size: 1.05rem; }
+
+/* PRODUCT CARDS */
+.producto-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  animation: slideIn 0.3s ease;
+}
+
+.producto-card:hover { box-shadow: 0 4px 20px rgba(37,99,235,0.1); transform: translateY(-1px); }
+
+.producto-card .cat-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #eff6ff;
+  color: var(--accent);
+  border: 1px solid #bfdbfe;
+  margin-bottom: 6px;
+}
+
+.producto-card .prod-nombre { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.producto-card .prod-precio { font-size: 1.2rem; font-weight: 800; color: var(--accent); }
+.producto-card .prod-det { font-size: 0.78rem; color: var(--muted); }
+
+.btn-del {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--accent3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-del:hover { background: #fee2e2; }
+
+.filter-select { font-family: 'Outfit', sans-serif; font-size: 0.82rem; max-width: 180px; }
+
+.empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+.empty-icon { font-size: 3rem; margin-bottom: 12px; }
+
+@keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 576px) {
+  .storage-grid { grid-template-columns: 1fr 1fr; }
+}

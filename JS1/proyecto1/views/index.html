@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto 1 — Lectura Dinámica de Formularios</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar navbar-dark px-4 py-3">
+  <span class="navbar-brand fw-bold fs-5">📋 Proyecto 1 — Formularios JS</span>
+  <span class="badge badge-custom">3 métodos de lectura</span>
+</nav>
+
+<div class="container-fluid px-4 py-4">
+
+  <!-- HEADER -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="hero-card p-4 rounded-3">
+        <h1 class="display-6 fw-bold mb-1">Carga Dinámica de Usuarios Estudiantes</h1>
+        <p class="text-muted mb-0">Sin recargar la página · Tres métodos de lectura · Integración Frontend ↔ Backend</p>
+      </div>
+    </div>
+  </div>
+  <!-- 3 MÉTODOS -->
+  <div class="row g-4 mb-4">
+
+    <!-- MÉTODO 1: JSON -->
+    <div class="col-12 col-lg-4">
+      <div class="section-card p-4 rounded-3 h-100">
+        <div class="method-badge mb-3">Método 1</div>
+        <h5 class="fw-bold">📦 JSON Body</h5>
+        <p class="text-muted small">Lectura con <code>req.body</code> (Content-Type: application/json)</p>
+
+        <div id="form-json">
+          <div class="field-group-label">Datos personales</div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="j-nombre" placeholder="Nombre" />
+            <div class="field-error" id="j-err-nombre"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="j-apellido" placeholder="Apellido" />
+            <div class="field-error" id="j-err-apellido"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="j-edad" placeholder="Edad" type="number" min="1" max="120" />
+            <div class="field-error" id="j-err-edad"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="j-email" placeholder="Email" type="email" />
+            <div class="field-error" id="j-err-email"></div>
+          </div>
+          <div class="field-group-label mt-2">Datos académicos</div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="j-legajo" placeholder="Número de legajo" type="number" min="1" />
+            <div class="field-error" id="j-err-legajo"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="j-carrera" placeholder="Carrera" />
+            <div class="field-error" id="j-err-carrera"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="j-universidad" placeholder="Universidad / Institución" />
+            <div class="field-error" id="j-err-universidad"></div>
+          </div>
+          <div class="mb-3">
+            <input class="form-control form-control-sm" id="j-anio" placeholder="Año de cursada (ej: 3)" type="number" min="1" max="10" />
+            <div class="field-error" id="j-err-anio"></div>
+          </div>
+          <button class="btn btn-success w-100 btn-sm fw-bold" onclick="enviarJSON()">Enviar como JSON</button>
+        </div>
+
+        <div id="res-json" class="mt-3 result-box d-none"></div>
+      </div>
+    </div>
+
+    <!-- MÉTODO 2: FormData -->
+    <div class="col-12 col-lg-4">
+      <div class="section-card p-4 rounded-3 h-100">
+        <div class="method-badge method-2 mb-3">Método 2</div>
+        <h5 class="fw-bold">📝 FormData</h5>
+        <p class="text-muted small">Lectura con <code>req.body</code> (URLEncoded / FormData)</p>
+
+        <form id="form-formdata" onsubmit="enviarFormData(event)" novalidate>
+          <div class="field-group-label">Datos personales</div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" name="nombre" id="f-nombre" placeholder="Nombre" />
+            <div class="field-error" id="f-err-nombre"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" name="apellido" id="f-apellido" placeholder="Apellido" />
+            <div class="field-error" id="f-err-apellido"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" name="edad" id="f-edad" placeholder="Edad" type="number" min="1" max="120" />
+            <div class="field-error" id="f-err-edad"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" name="email" id="f-email" placeholder="Email" type="email" />
+            <div class="field-error" id="f-err-email"></div>
+          </div>
+          <div class="field-group-label mt-2">Datos académicos</div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" name="legajo" id="f-legajo" placeholder="Número de legajo" type="number" min="1" />
+            <div class="field-error" id="f-err-legajo"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" name="carrera" id="f-carrera" placeholder="Carrera" />
+            <div class="field-error" id="f-err-carrera"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" name="universidad" id="f-universidad" placeholder="Universidad / Institución" />
+            <div class="field-error" id="f-err-universidad"></div>
+          </div>
+          <div class="mb-3">
+            <input class="form-control form-control-sm" name="anio" id="f-anio" placeholder="Año de cursada (ej: 3)" type="number" min="1" max="10" />
+            <div class="field-error" id="f-err-anio"></div>
+          </div>
+          <button type="submit" class="btn btn-warning w-100 btn-sm fw-bold text-dark">Enviar como FormData</button>
+        </form>
+
+        <div id="res-form" class="mt-3 result-box d-none"></div>
+      </div>
+    </div>
+
+    <!-- MÉTODO 3: Query String -->
+    <div class="col-12 col-lg-4">
+      <div class="section-card p-4 rounded-3 h-100">
+        <div class="method-badge method-3 mb-3">Método 3</div>
+        <h5 class="fw-bold">🔗 Query String</h5>
+        <p class="text-muted small">Lectura con <code>req.query</code> (parámetros en URL)</p>
+
+        <div id="form-query">
+          <div class="field-group-label">Datos personales</div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="q-nombre" placeholder="Nombre" />
+            <div class="field-error" id="q-err-nombre"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="q-apellido" placeholder="Apellido" />
+            <div class="field-error" id="q-err-apellido"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="q-edad" placeholder="Edad" type="number" min="1" max="120" />
+            <div class="field-error" id="q-err-edad"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="q-email" placeholder="Email" type="email" />
+            <div class="field-error" id="q-err-edad"></div>
+          </div>
+          <div class="field-group-label mt-2">Datos académicos</div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="q-legajo" placeholder="Número de legajo" type="number" min="1" />
+            <div class="field-error" id="q-err-legajo"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="q-carrera" placeholder="Carrera" />
+            <div class="field-error" id="q-err-carrera"></div>
+          </div>
+          <div class="mb-2">
+            <input class="form-control form-control-sm" id="q-universidad" placeholder="Universidad / Institución" />
+            <div class="field-error" id="q-err-universidad"></div>
+          </div>
+          <div class="mb-3">
+            <input class="form-control form-control-sm" id="q-anio" placeholder="Año de cursada (ej: 3)" type="number" min="1" max="10" />
+            <div class="field-error" id="q-err-anio"></div>
+          </div>
+          <button class="btn btn-info w-100 btn-sm fw-bold text-dark" onclick="enviarQuery()">Enviar como Query String</button>
+        </div>
+
+        <div id="res-query" class="mt-3 result-box d-none"></div>
+      </div>
+    </div>
+
+  </div><!-- /row métodos -->
+
+  <!-- LISTADO -->
+  <div class="row">
+    <div class="col-12">
+      <div class="section-card p-4 rounded-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold mb-0">📋 Lista de Usuarios</h4>
+          <button class="btn btn-outline-secondary btn-sm" onclick="cargarTodos()">🔃 Actualizar lista</button>
+        </div>
+        <div id="lista-usuarios" class="row g-3">
+          <p class="text-muted text-center">Cargando...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto 3 — Almacén de Personas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar px-4 py-3 d-flex justify-content-between align-items-center">
+  <span class="nav-title">👥 Almacén de Personas</span>
+  <div class="d-flex gap-2 align-items-center">
+    <span class="ls-badge">💾 LocalStorage</span>
+    <span class="count-badge" id="nav-total">0 personas</span>
+  </div>
+</nav>
+
+<div class="container-fluid px-4 py-4">
+  <div class="row g-4">
+
+    <!-- ===== FORMULARIO ===== -->
+    <div class="col-12 col-xl-6">
+      <div class="card-panel p-4 rounded-4">
+        <h4 class="fw-bold mb-1">📋 Registrar Persona</h4>
+        <p class="text-secondary small mb-4">Todos los campos validados por JS · Almacenamiento en LocalStorage</p>
+
+        <form id="form-persona" novalidate>
+
+          <!-- SECCIÓN 1: Datos personales -->
+          <div class="seccion-titulo">👤 Datos Personales</div>
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label">Nombre *</label>
+              <input class="form-control" id="nombre" name="nombre" placeholder="Juan" />
+              <div class="invalid-feedback" id="err-nombre"></div>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Apellido *</label>
+              <input class="form-control" id="apellido" name="apellido" placeholder="Pérez" />
+              <div class="invalid-feedback" id="err-apellido"></div>
+            </div>
+            <div class="col-4">
+              <label class="form-label">Edad *</label>
+              <input class="form-control" id="edad" name="edad" type="number" min="0" max="120" placeholder="25" />
+              <div class="invalid-feedback" id="err-edad"></div>
+            </div>
+            <div class="col-8">
+              <label class="form-label">Fecha de Nacimiento *</label>
+              <input class="form-control" id="fechaNacimiento" name="fechaNacimiento" type="date" />
+              <div class="invalid-feedback" id="err-fechaNacimiento"></div>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Sexo *</label>
+              <select class="form-select" id="sexo" name="sexo">
+                <option value="">Seleccionar...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+              </select>
+              <div class="invalid-feedback" id="err-sexo"></div>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Documento (DNI) *</label>
+              <input class="form-control" id="documento" name="documento" placeholder="12345678" maxlength="8" />
+              <div class="invalid-feedback" id="err-documento"></div>
+            </div>
+          </div>
+
+          <!-- SECCIÓN 2: Información extra -->
+          <div class="seccion-titulo">📇 Información Adicional</div>
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label">Estado Civil *</label>
+              <select class="form-select" id="estadoCivil" name="estadoCivil">
+                <option value="">Seleccionar...</option>
+                <option value="Soltero/a">Soltero/a</option>
+                <option value="Casado/a">Casado/a</option>
+                <option value="Divorciado/a">Divorciado/a</option>
+                <option value="Viudo/a">Viudo/a</option>
+                <option value="Unión libre">Unión libre</option>
+              </select>
+              <div class="invalid-feedback" id="err-estadoCivil"></div>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Nacionalidad *</label>
+              <input class="form-control" id="nacionalidad" name="nacionalidad" placeholder="Argentina" />
+              <div class="invalid-feedback" id="err-nacionalidad"></div>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Teléfono *</label>
+              <input class="form-control" id="telefono" name="telefono" placeholder="+54 223 1234567" />
+              <div class="invalid-feedback" id="err-telefono"></div>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Email *</label>
+              <input class="form-control" id="email" name="email" placeholder="juan@email.com" />
+              <div class="invalid-feedback" id="err-email"></div>
+            </div>
+          </div>
+
+          <!-- SECCIÓN 3: Hijos -->
+          <div class="seccion-titulo">👶 Hijos</div>
+          <div class="row g-3 mb-4">
+            <div class="col-6">
+              <label class="form-label">¿Tiene hijos? *</label>
+              <div class="d-flex gap-3 mt-1">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="tieneHijos" id="hijos-si" value="si" onchange="toggleCantidadHijos()" />
+                  <label class="form-check-label" for="hijos-si">Sí</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="tieneHijos" id="hijos-no" value="no" onchange="toggleCantidadHijos()" />
+                  <label class="form-check-label" for="hijos-no">No</label>
+                </div>
+              </div>
+              <div class="invalid-feedback d-block" id="err-tieneHijos"></div>
+            </div>
+            <div class="col-6" id="campo-cantidad-hijos" style="display:none">
+              <label class="form-label">Cantidad de hijos *</label>
+              <input class="form-control" id="cantidadHijos" name="cantidadHijos" type="number" min="1" max="20" placeholder="1" />
+              <div class="invalid-feedback" id="err-cantidadHijos"></div>
+            </div>
+          </div>
+
+          <!-- Botón -->
+          <button type="submit" class="btn btn-guardar w-100 fw-bold fs-6" onclick="guardarPersona(event)">
+            💾 Guardar en LocalStorage
+          </button>
+        </form>
+
+        <!-- NOTIFICACIÓN DINÁMICA -->
+        <div id="notificacion" class="notif mt-3 d-none"></div>
+      </div>
+    </div>
+
+    <!-- ===== LISTA ===== -->
+    <div class="col-12 col-xl-6">
+      <div class="card-panel p-4 rounded-4 h-100">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h4 class="fw-bold mb-1">📋 Personas Almacenadas</h4>
+            <p class="text-secondary small mb-0">Datos persistentes en LocalStorage del navegador</p>
+          </div>
+          <button class="btn btn-limpiar btn-sm" onclick="limpiarTodo()">🗑️ Limpiar todo</button>
+        </div>
+
+        <!-- Buscador -->
+        <input class="form-control mb-3 busqueda" id="buscador" placeholder="🔍 Buscar por nombre o apellido..." oninput="buscarPersonas()" />
+
+        <!-- Stats rápidas -->
+        <div class="stats-row mb-4">
+          <div class="stat-item">
+            <span class="stat-num" id="st-total">0</span>
+            <span class="stat-lbl">Total</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="st-masc">0</span>
+            <span class="stat-lbl">Masculinos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="st-fem">0</span>
+            <span class="stat-lbl">Femeninos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="st-edad">-</span>
+            <span class="stat-lbl">Edad prom.</span>
+          </div>
+        </div>
+
+        <div id="lista-personas">
+          <div class="empty-state">
+            <div>👥</div>
+            <p>No hay personas registradas aún.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETALLE -->
+<div class="modal fade" id="modalDetalle" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content modal-custom">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold" id="modal-nombre">Detalle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
