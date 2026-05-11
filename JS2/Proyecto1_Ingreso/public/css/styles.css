@@ -1,0 +1,209 @@
+/* === Estilos personalizados - Proyecto 1 === */
+
+/* Fuente importada */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --gradient-start: #6366f1;
+    --gradient-end: #8b5cf6;
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Navbar con gradiente */
+.navbar-custom {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .btn {
+    color: #fff !important;
+}
+
+/* Botón toggle tema */
+.btn-theme-toggle {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-speed);
+    background: transparent;
+}
+
+.btn-theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #fff;
+    transform: rotate(20deg);
+}
+
+/* Cards con sombra suave */
+.card-custom {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+}
+
+[data-bs-theme="dark"] .card-custom {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-custom:hover {
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+}
+
+/* Contenedor de números */
+.numeros-container {
+    min-height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(99, 102, 241, 0.04);
+    border: 2px dashed rgba(99, 102, 241, 0.2);
+    transition: all var(--transition-speed);
+}
+
+[data-bs-theme="dark"] .numeros-container {
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.numeros-container:empty::before {
+    content: 'Los números aparecerán aquí...';
+    color: #adb5bd;
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Badge de número */
+.badge-numero {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    animation: fadeInUp 0.3s ease;
+    cursor: default;
+    transition: transform 0.2s;
+}
+
+.badge-numero:hover {
+    transform: scale(1.05);
+}
+
+/* Botón eliminar dentro del badge */
+.badge-numero .btn-remove {
+    background: rgba(255, 255, 255, 0.25);
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    padding: 0;
+    line-height: 1;
+}
+
+.badge-numero .btn-remove:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contador */
+.contador-badge {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+/* Input personalizado */
+.form-control:focus {
+    border-color: var(--gradient-start);
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+}
+
+/* Botones */
+.btn-gradient {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 28px;
+    border-radius: 10px;
+    transition: all var(--transition-speed);
+}
+
+.btn-gradient:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    color: #fff;
+}
+
+.btn-gradient:disabled {
+    opacity: 0.5;
+    color: #fff;
+}
+
+/* Alerta de éxito */
+.alert-success-custom {
+    border-radius: 12px;
+    border-left: 4px solid #22c55e;
+    animation: fadeInUp 0.4s ease;
+}
+
+/* Footer */
+.footer-custom {
+    margin-top: auto;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: rgba(255, 255, 255, 0.85);
+    padding: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .badge-numero {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    .card-custom .card-body {
+        padding: 1rem;
+    }
+}

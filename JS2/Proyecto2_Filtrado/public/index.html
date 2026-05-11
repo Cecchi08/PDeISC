@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Filtrado de números - Sube un archivo TXT y filtra los números que empiezan y terminan con el mismo dígito">
+    <title>Proyecto 2 - Filtrado de Números</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom py-3">
+        <div class="container-fluid px-3 px-md-5">
+            <a class="navbar-brand fw-bold fs-4" href="#">
+                Filtrado de Números
+            </a>
+            <button class="btn btn-theme-toggle" id="btnThemeToggle" title="Cambiar tema">
+                <i class="bi bi-moon-fill" id="themeIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container-fluid px-3 px-md-5 my-4 flex-grow-1">
+
+        <!-- Fila superior: Subida + Instrucciones -->
+        <div class="row g-4 mb-4">
+            <div class="col-12 col-lg-7">
+                <div class="card card-custom h-100">
+                    <div class="card-body p-4">
+                        <h1 class="h4 fw-bold mb-1">
+                            <i class="bi bi-upload text-primary me-2"></i>Subir Archivo
+                        </h1>
+                        <p class="text-body-secondary mb-4">Seleccioná un archivo .txt con números (uno por línea) para analizar.</p>
+
+                        <!-- Zona de subida con drag & drop -->
+                        <div class="upload-zone mb-3" id="uploadZone">
+                            <i class="bi bi-cloud-arrow-up upload-icon d-block mb-2"></i>
+                            <p class="mb-1 fw-semibold">Arrastrá tu archivo aquí o hacé clic para seleccionar</p>
+                            <small class="text-body-secondary">Solo archivos .txt</small>
+                            <input type="file" class="d-none" id="inputArchivo" accept=".txt">
+                        </div>
+
+                        <!-- Archivo seleccionado -->
+                        <div id="archivoInfo" class="alert alert-info d-flex align-items-center rounded-3" style="display:none !important;">
+                            <i class="bi bi-file-earmark-text me-2 fs-5"></i>
+                            <span id="archivoNombre"></span>
+                        </div>
+
+                        <button class="btn btn-gradient btn-lg w-100" id="btnProcesar" disabled>
+                            <i class="bi bi-gear me-2"></i>Procesar Archivo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-5">
+                <div class="card card-custom h-100">
+                    <div class="card-body p-4">
+                        <h2 class="h5 fw-bold mb-3">
+                            <i class="bi bi-info-circle me-2 text-primary"></i>¿Cómo funciona?
+                        </h2>
+                        <p class="text-body-secondary mb-3">Este proyecto filtra los números que <strong>empiezan y terminan con el mismo dígito</strong>.</p>
+                        <ul class="list-unstyled text-body-secondary small">
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i><strong>525</strong> → Útil (empieza y termina con 5)</li>
+                            <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i><strong>1001</strong> → Útil (empieza y termina con 1)</li>
+                            <li class="mb-2"><i class="bi bi-x-circle text-danger me-2"></i><strong>123</strong> → No útil (empieza con 1, termina con 3)</li>
+                            <li class="mb-2"><i class="bi bi-x-circle text-danger me-2"></i><strong>456</strong> → No útil (empieza con 4, termina con 6)</li>
+                        </ul>
+                        <hr>
+                        <ul class="list-unstyled text-body-secondary small mb-0">
+                            <li class="mb-2"><i class="bi bi-1-circle me-2 text-primary"></i>Subí un archivo .txt generado en el <strong>Proyecto 1</strong>.</li>
+                            <li class="mb-2"><i class="bi bi-2-circle me-2 text-primary"></i>Presioná <strong>Procesar</strong> para analizar los números.</li>
+                            <li><i class="bi bi-3-circle me-2 text-primary"></i>Descargá el resultado filtrado en un nuevo .txt.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultados (oculto inicialmente) -->
+        <div id="seccionResultados" style="display:none;">
+
+            <!-- Stats Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                    <div class="stat-card card-custom bg-primary bg-opacity-10">
+                        <div class="stat-value text-primary" id="statTotal">0</div>
+                        <div class="stat-label text-primary">Total</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card card-custom bg-success bg-opacity-10">
+                        <div class="stat-value text-success" id="statUtiles">0</div>
+                        <div class="stat-label text-success">Útiles</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card card-custom bg-danger bg-opacity-10">
+                        <div class="stat-value text-danger" id="statNoUtiles">0</div>
+                        <div class="stat-label text-danger">No Útiles</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card card-custom bg-warning bg-opacity-10">
+                        <div class="stat-value text-warning" id="statPorcentaje">0%</div>
+                        <div class="stat-label text-warning">% Útiles</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de porcentaje + Números útiles lado a lado -->
+            <div class="row g-4 mb-4">
+                <div class="col-12 col-lg-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body p-4">
+                            <h2 class="h6 fw-semibold mb-3">
+                                <i class="bi bi-bar-chart me-2 text-primary"></i>Porcentaje de números útiles
+                            </h2>
+                            <div class="progress progress-custom">
+                                <div class="progress-bar" id="progressBar" style="width:0%"></div>
+                            </div>
+                            <small class="text-body-secondary mt-2 d-block" id="progressLabel">0% útiles</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body p-4 text-center">
+                            <h2 class="h5 fw-bold mb-3">
+                                <i class="bi bi-floppy text-primary me-2"></i>Resultado Guardado
+                            </h2>
+                            <p class="text-body-secondary mb-3">El resultado del filtrado se guardó automáticamente.</p>
+                            <a href="/api/descargar-resultado" class="btn btn-gradient btn-lg">
+                                <i class="bi bi-download me-2"></i>Descargar Resultado
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Números útiles y no útiles lado a lado -->
+            <div class="row g-4 mb-4">
+                <div class="col-12 col-lg-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body p-4">
+                            <h2 class="h5 fw-bold mb-2">
+                                <i class="bi bi-check-circle text-success me-2"></i>Números Útiles
+                                <small class="text-body-secondary fw-normal">(ordenados ascendente)</small>
+                            </h2>
+                            <p class="text-body-secondary small mb-3">Números que empiezan y terminan con el mismo dígito</p>
+                            <div class="numeros-container" id="numerosUtiles"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body p-4">
+                            <h2 class="h5 fw-bold mb-2">
+                                <i class="bi bi-x-circle text-danger me-2"></i>Números No Útiles
+                            </h2>
+                            <p class="text-body-secondary small mb-3">Números que no cumplen con el criterio</p>
+                            <div class="numeros-container" id="numerosNoUtiles"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom text-center">
+        <div class="container-fluid px-3 px-md-5">
+            <small>Proyecto 2 — Filtrado de Números &copy; 2026</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="context/theme.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

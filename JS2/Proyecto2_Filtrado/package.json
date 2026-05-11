@@ -1,0 +1,18 @@
+{
+  "name": "proyecto2-filtrado-numeros",
+  "version": "1.0.0",
+  "description": "Proyecto 2 - Subida, filtrado y análisis de números desde archivo TXT",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.22.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

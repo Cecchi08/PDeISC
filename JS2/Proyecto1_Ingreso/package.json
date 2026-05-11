@@ -1,0 +1,17 @@
+{
+  "name": "proyecto1-ingreso-numeros",
+  "version": "1.0.0",
+  "description": "Proyecto 1 - Ingreso de números y guardado en archivo TXT",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.22.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,13 @@
+=== RESULTADO DEL FILTRADO ===
+
+Números útiles (ordenados ascendente):
+3
+44
+44
+444
+2123132
+
+Total analizados: 10
+Útiles: 5
+No útiles: 5
+Porcentaje útiles: 50.00%

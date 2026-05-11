@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ingreso de números - Carga entre 10 y 20 números y guárdalos en un archivo TXT">
+    <title>Proyecto 1 - Ingreso de Números</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom py-3">
+        <div class="container-fluid px-3 px-md-5">
+            <a class="navbar-brand fw-bold fs-4" href="#">
+                Ingreso de Números
+            </a>
+            <button class="btn btn-theme-toggle" id="btnThemeToggle" title="Cambiar tema">
+                <i class="bi bi-moon-fill" id="themeIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container-fluid px-3 px-md-5 my-4 flex-grow-1">
+        <div class="row g-4">
+
+            <!-- Columna izquierda: Ingreso de números -->
+            <div class="col-12 col-lg-7">
+                <div class="card card-custom h-100">
+                    <div class="card-body p-4">
+                        <h1 class="h4 fw-bold mb-1">
+                            <i class="bi bi-plus-circle text-primary me-2"></i>Cargar Números
+                        </h1>
+                        <p class="text-body-secondary mb-4">Ingresá entre 10 y 20 números. Se mostrarán a medida que los cargues.</p>
+
+                        <!-- Formulario de ingreso -->
+                        <form id="formNumero" novalidate>
+                            <div class="row g-2 mb-3">
+                                <div class="col">
+                                    <input type="text" inputmode="numeric" pattern="-?[0-9]+"
+                                        class="form-control form-control-lg" id="inputNumero"
+                                        placeholder="Escribí un número..." aria-label="Ingresar número"
+                                        autocomplete="off" required>
+                                    <div class="invalid-feedback">Ingresá únicamente un número válido (sin letras ni caracteres especiales).</div>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-gradient btn-lg" id="btnAgregar">
+                                        <i class="bi bi-plus-lg me-1 d-none d-sm-inline"></i>Agregar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Contador -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-body-secondary">
+                                <i class="bi bi-list-ol me-1"></i>Números cargados:
+                            </span>
+                            <span class="badge contador-badge bg-primary" id="contador">0 / 10-20</span>
+                        </div>
+
+                        <!-- Barra de progreso -->
+                        <div class="progress progress-custom mb-4" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="20">
+                            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                        </div>
+
+                        <!-- Contenedor de números -->
+                        <h2 class="h6 fw-semibold mb-2">
+                            <i class="bi bi-grid-3x3-gap me-1 text-primary"></i>Números ingresados
+                        </h2>
+                        <div class="numeros-container" id="numerosContainer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna derecha: Guardar archivo -->
+            <div class="col-12 col-lg-5">
+                <div class="card card-custom h-100">
+                    <div class="card-body p-4">
+                        <h2 class="h5 fw-bold mb-3">
+                            <i class="bi bi-floppy me-2 text-primary"></i>Guardar Archivo
+                        </h2>
+                        <p class="text-body-secondary mb-3">Cuando tengas al menos 10 números, podés guardarlos en un archivo .txt</p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-gradient" id="btnGuardar" disabled>
+                                <i class="bi bi-save me-2"></i>Guardar TXT
+                            </button>
+                            <button class="btn btn-outline-primary" id="btnDescargar" style="display:none;">
+                                <i class="bi bi-download me-2"></i>Descargar Archivo
+                            </button>
+                            <button class="btn btn-outline-secondary" id="btnModificar" style="display:none;">
+                                <i class="bi bi-pencil me-2"></i>Modificar
+                            </button>
+                            <button class="btn btn-outline-danger" id="btnLimpiar">
+                                <i class="bi bi-trash me-2"></i>Limpiar Todo
+                            </button>
+                        </div>
+
+                        <!-- Mensaje de éxito -->
+                        <div id="mensajeExito" class="mt-3" style="display:none;"></div>
+
+                        <!-- Instrucciones -->
+                        <hr class="my-4">
+                        <h3 class="h6 fw-semibold mb-2">
+                            <i class="bi bi-info-circle me-1 text-primary"></i>Instrucciones
+                        </h3>
+                        <ul class="list-unstyled text-body-secondary small">
+                            <li class="mb-2"><i class="bi bi-1-circle me-2 text-primary"></i>Ingresá un número en el campo y presioná <strong>Agregar</strong> o <strong>Enter</strong>.</li>
+                            <li class="mb-2"><i class="bi bi-2-circle me-2 text-primary"></i>Podés eliminar un número haciendo clic en la <strong>✕</strong> del badge.</li>
+                            <li class="mb-2"><i class="bi bi-3-circle me-2 text-primary"></i>Cargá entre <strong>10 y 20</strong> números como mínimo y máximo.</li>
+                            <li class="mb-2"><i class="bi bi-4-circle me-2 text-primary"></i>Presioná <strong>Guardar TXT</strong> para generar el archivo.</li>
+                            <li><i class="bi bi-5-circle me-2 text-primary"></i>Descargá el archivo con el botón <strong>Descargar</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom text-center">
+        <div class="container-fluid px-3 px-md-5">
+            <small>Proyecto 1 — Ingreso de Números &copy; 2026</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="context/theme.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+/* === Estilos personalizados - Proyecto 2 === */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --gradient-start: #6366f1;
+    --gradient-end: #8b5cf6;
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Navbar */
+.navbar-custom {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .btn { color: #fff !important; }
+
+.btn-theme-toggle {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition-speed);
+    background: transparent;
+}
+
+.btn-theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #fff;
+    transform: rotate(20deg);
+}
+
+/* Cards */
+.card-custom {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+}
+
+[data-bs-theme="dark"] .card-custom {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-custom:hover {
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+}
+
+/* Zona de subida */
+.upload-zone {
+    border: 2px dashed rgba(99, 102, 241, 0.4);
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    transition: all var(--transition-speed);
+    cursor: pointer;
+    background: rgba(99, 102, 241, 0.03);
+}
+
+.upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--gradient-start);
+    background: rgba(99, 102, 241, 0.08);
+    transform: scale(1.01);
+}
+
+[data-bs-theme="dark"] .upload-zone {
+    background: rgba(99, 102, 241, 0.06);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.upload-icon { font-size: 3rem; color: var(--gradient-start); }
+
+/* Contenedor de números */
+.numeros-container {
+    min-height: 60px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(99, 102, 241, 0.04);
+    border: 2px dashed rgba(99, 102, 241, 0.2);
+}
+
+[data-bs-theme="dark"] .numeros-container {
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* Badge */
+.badge-numero {
+    font-size: 1rem; font-weight: 500;
+    padding: 8px 16px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: #fff;
+    animation: fadeInUp 0.3s ease;
+    transition: transform 0.2s;
+}
+
+.badge-numero:hover { transform: scale(1.05); }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stats cards */
+.stat-card {
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    transition: transform var(--transition-speed);
+}
+
+.stat-card:hover { transform: translateY(-4px); }
+
+.stat-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+/* Progress bar personalizada */
+.progress-custom {
+    height: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-custom .progress-bar {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+/* Botones */
+.btn-gradient {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border: none; color: #fff; font-weight: 600;
+    padding: 10px 28px; border-radius: 10px;
+    transition: all var(--transition-speed);
+}
+
+.btn-gradient:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    color: #fff;
+}
+
+.btn-gradient:disabled { opacity: 0.5; color: #fff; }
+
+.form-control:focus {
+    border-color: var(--gradient-start);
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+}
+
+/* Footer */
+.footer-custom {
+    margin-top: auto;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: rgba(255, 255, 255, 0.85);
+    padding: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .badge-numero { font-size: 0.85rem; padding: 6px 12px; }
+    .stat-value { font-size: 1.6rem; }
+    .upload-zone { padding: 24px 12px; }
+    .card-custom .card-body { padding: 1rem; }
+}
