@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EJ3 — Búsqueda de usuarios | JS4</title>
+  <meta name="description" content="Ejercicio 3: Obtiene todos los usuarios de la API y permite filtrarlos por nombre en tiempo real." />
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <a href="/" class="navbar-brand">
+      <div class="brand-icon">JS4</div>
+      <div>
+        <div class="brand-title">Ejercicio 3</div>
+        <div class="brand-sub">Búsqueda en tiempo real</div>
+      </div>
+    </a>
+    <div class="navbar-actions">
+      <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <nav class="ex-nav" id="mobile-nav" aria-label="Ejercicios">
+        <a href="http://localhost:3001">EJ1</a>
+        <a href="http://localhost:3002">EJ2</a>
+        <a href="http://localhost:3003" class="active" aria-current="page">EJ3</a>
+        <a href="http://localhost:3004">EJ4</a>
+      </nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"></button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="ex-badge">🔍 Ejercicio 3</div>
+    <h1 class="page-title">Búsqueda en tiempo real</h1>
+    <p class="page-subtitle">
+      El servidor obtiene todos los usuarios de <code>jsonplaceholder.typicode.com/users</code>
+      y los envía al frontend. Al escribir, el array se filtra localmente sin nuevas llamadas a la API.
+    </p>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-box">
+        <span class="stat-val" id="stat-total">—</span>
+        <span class="stat-lbl">Total en API</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="stat-visible">—</span>
+        <span class="stat-lbl">Resultados</span>
+      </div>
+      <div class="stat-box" id="stat-cache-box">
+        <span class="stat-val" id="stat-cache" style="font-size:1rem">—</span>
+        <span class="stat-lbl">Fuente</span>
+      </div>
+    </div>
+
+    <!-- Búsqueda -->
+    <div class="card">
+      <div class="card-header">
+        <div class="dot"></div>
+        <h2>Filtrar por nombre</h2>
+      </div>
+      <div class="d-flex gap-1 align-center">
+        <div class="input-icon-wrap" style="flex:1">
+          <svg class="input-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            id="search-input"
+            class="input"
+            type="search"
+            placeholder="Escribí un nombre para buscar…"
+            aria-label="Buscar usuario por nombre"
+          />
+        </div>
+        <button class="btn btn-sm btn-secondary" onclick="limpiarBusqueda()" title="Limpiar búsqueda">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Resultados -->
+    <div class="card mt-1">
+      <div class="card-header">
+        <div class="dot"></div>
+        <h2 id="results-title">Cargando usuarios…</h2>
+      </div>
+      <div id="resultado">
+        <div class="loader"><div class="spinner"></div>Conectando al servidor…</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="theme/context.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

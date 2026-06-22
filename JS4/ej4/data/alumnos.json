@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "nombre": "Valentina Romero",
+    "email": "vale.romero@uni.edu",
+    "carrera": "Ingeniería en Sistemas",
+    "anio": 3,
+    "promedio": 8.5
+  },
+  {
+    "id": 2,
+    "nombre": "Mateo García",
+    "email": "mateo.garcia@uni.edu",
+    "carrera": "Diseño Gráfico",
+    "anio": 1,
+    "promedio": 7.2
+  },
+  {
+    "id": 3,
+    "nombre": "Lucía Fernández",
+    "email": "lucia.fern@uni.edu",
+    "carrera": "Administración",
+    "anio": 4,
+    "promedio": 9.1
+  },
+  {
+    "id": 4,
+    "nombre": "Santiago López",
+    "email": "santi.lopez@uni.edu",
+    "carrera": "Ingeniería en Sistemas",
+    "anio": 2,
+    "promedio": 6.8
+  },
+  {
+    "id": 5,
+    "nombre": "Camila Torres",
+    "email": "cami.torres@uni.edu",
+    "carrera": "Contador Público",
+    "anio": 3,
+    "promedio": 8
+  },
+  {
+    "id": 7,
+    "nombre": "nashe",
+    "email": "cecchinimateo21@uni.edu",
+    "carrera": "anashei",
+    "anio": 1,
+    "promedio": 7
+  }
+]

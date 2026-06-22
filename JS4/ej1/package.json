@@ -1,0 +1,23 @@
+{
+  "name": "ej1-fetch-axios",
+  "version": "1.0.0",
+  "description": "Ejercicio 1: GET a API pública con fetch y axios, servido por Express",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "fetch",
+    "axios",
+    "api",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "express": "^4.22.2"
+  }
+}

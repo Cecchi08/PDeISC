@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EJ1 — Obtener datos de API | JS4</title>
+  <meta name="description" content="Ejercicio 1: Consumo de API pública usando fetch nativo y axios desde el servidor Express." />
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <a href="/" class="navbar-brand">
+      <div class="brand-icon">JS4</div>
+      <div>
+        <div class="brand-title">Ejercicio 1</div>
+        <div class="brand-sub">API pública con fetch &amp; axios</div>
+      </div>
+    </a>
+    <div class="navbar-actions">
+      <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <nav class="ex-nav" id="mobile-nav" aria-label="Ejercicios">
+        <a href="http://localhost:3001" class="active" aria-current="page">EJ1</a>
+        <a href="http://localhost:3002">EJ2</a>
+        <a href="http://localhost:3003">EJ3</a>
+        <a href="http://localhost:3004">EJ4</a>
+      </nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"></button>
+    </div>
+  </nav>
+
+  <!-- ===================== MAIN ===================== -->
+  <main>
+
+    <!-- Header -->
+    <div class="ex-badge">⚡ Ejercicio 1</div>
+    <h1 class="page-title">Obtener datos de una API pública</h1>
+    <p class="page-subtitle">
+      El servidor Express actúa de proxy: llama a
+      <code>jsonplaceholder.typicode.com/users</code> usando <strong>fetch nativo</strong>
+      o <strong>axios</strong> y devuelve los datos al frontend.
+    </p>
+
+    <!-- Stats -->
+    <div class="stats" id="stats-row" style="display:none">
+      <div class="stat-box">
+        <span class="stat-val" id="stat-total">0</span>
+        <span class="stat-lbl">Usuarios totales</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="stat-metodo">—</span>
+        <span class="stat-lbl">Método usado</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="stat-tiempo">0ms</span>
+        <span class="stat-lbl">Tiempo de API</span>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="card">
+      <div class="card-header">
+        <div class="dot"></div>
+        <h2>Seleccioná el método HTTP</h2>
+      </div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-primary" id="btn-fetch" onclick="cargarConFetch()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Cargar con <code style="font-size:.8em">fetch</code>
+        </button>
+        <button class="btn btn-secondary" id="btn-axios" onclick="cargarConAxios()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Cargar con <code style="font-size:.8em">axios</code>
+        </button>
+        <button class="btn btn-sm btn-secondary" onclick="limpiar()" id="btn-limpiar">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="1 4 1 10 7 10"/>
+            <path d="M3.51 15a9 9 0 1 0 .49-3.74"/>
+          </svg>
+          Limpiar
+        </button>
+      </div>
+    </div>
+
+    <!-- Mensaje de método -->
+    <div id="method-msg" class="mt-1"></div>
+
+    <!-- Resultados -->
+    <div class="card mt-1">
+      <div class="card-header">
+        <div class="dot"></div>
+        <h2>
+          Usuarios obtenidos
+          <span id="count-chip" class="chip" style="display:none;margin-left:6px"></span>
+        </h2>
+      </div>
+      <div id="resultado">
+        <div class="empty-state">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <p>No hay usuarios cargados</p>
+          <small>Presioná un botón para obtener datos 👆</small>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="theme/context.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

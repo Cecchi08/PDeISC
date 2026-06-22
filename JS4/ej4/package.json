@@ -1,0 +1,23 @@
+{
+  "name": "ej4-api-alumnos",
+  "version": "1.0.0",
+  "description": "Ejercicio 4: API REST propia con Express para CRUD de alumnos",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "rest",
+    "api",
+    "crud",
+    "alumnos"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.22.2"
+  }
+}

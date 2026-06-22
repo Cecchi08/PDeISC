@@ -1,0 +1,23 @@
+{
+  "name": "ej3-search",
+  "version": "1.0.0",
+  "description": "Ejercicio 3: Búsqueda en tiempo real filtrando array de usuarios",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "search",
+    "filter",
+    "api",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "express": "^4.22.2"
+  }
+}

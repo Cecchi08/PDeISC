@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EJ4 — API de Alumnos | JS4</title>
+  <meta name="description" content="Ejercicio 4: API REST propia con Express. CRUD completo de alumnos." />
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <a href="/" class="navbar-brand">
+      <div class="brand-icon">JS4</div>
+      <div>
+        <div class="brand-title">Ejercicio 4</div>
+        <div class="brand-sub">API REST propia con Express</div>
+      </div>
+    </a>
+    <div class="navbar-actions">
+      <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <nav class="ex-nav" id="mobile-nav" aria-label="Ejercicios">
+        <a href="http://localhost:3001">EJ1</a>
+        <a href="http://localhost:3002">EJ2</a>
+        <a href="http://localhost:3003">EJ3</a>
+        <a href="http://localhost:3004" class="active" aria-current="page">EJ4</a>
+      </nav>
+      <button id="theme-toggle" aria-label="Cambiar tema"></button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="ex-badge">🖥️ Ejercicio 4</div>
+    <h1 class="page-title">API propia con Express</h1>
+    <p class="page-subtitle">
+      Servidor Node.js + Express con endpoint <code>/api/alumnos</code>.
+      Operaciones GET, POST, PUT y DELETE sobre una lista de alumnos en memoria.
+    </p>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-box">
+        <span class="stat-val" id="stat-total">—</span>
+        <span class="stat-lbl">Total alumnos</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="stat-promedio">—</span>
+        <span class="stat-lbl">Promedio general</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="stat-carreras">—</span>
+        <span class="stat-lbl">Carreras</span>
+      </div>
+      <div class="stat-box" id="stat-server-box">
+        <span class="stat-val" style="font-size:1rem" id="stat-server">Verificando…</span>
+        <span class="stat-lbl">Servidor</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+
+      <!-- Formulario alta -->
+      <div class="card">
+        <div class="card-header">
+          <div class="dot"></div>
+          <h2>Agregar alumno</h2>
+        </div>
+        <form id="form-alumno" novalidate>
+          <div class="input-group">
+            <label for="inp-nombre">Nombre completo</label>
+            <input id="inp-nombre" class="input" type="text" placeholder="Juan Pérez" />
+            <span class="field-error" id="err-nombre"></span>
+          </div>
+          <div class="input-group">
+            <label for="inp-email">Email institucional</label>
+            <input id="inp-email" class="input" type="email" placeholder="juan@uni.edu" />
+            <span class="field-error" id="err-email"></span>
+          </div>
+          <div class="input-group">
+            <label for="inp-carrera">Carrera</label>
+            <input id="inp-carrera" class="input" type="text" placeholder="Ingeniería en Sistemas" />
+            <span class="field-error" id="err-carrera"></span>
+          </div>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="inp-anio">Año (1-5)</label>
+              <input id="inp-anio" class="input" type="number" min="1" max="5" value="1" />
+            </div>
+            <div class="input-group">
+              <label for="inp-promedio">Promedio (0-10)</label>
+              <input id="inp-promedio" class="input" type="number" step="0.1" min="0" max="10" value="7.0" />
+            </div>
+          </div>
+          <div id="form-msg"></div>
+          <button type="submit" class="btn btn-primary btn-block" id="btn-agregar">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Agregar alumno
+          </button>
+        </form>
+      </div>
+
+      <!-- Tabla alumnos -->
+      <div class="card">
+        <div class="card-header">
+          <div class="dot"></div>
+          <h2>Alumnos registrados
+            <span id="count-chip" class="chip" style="display:none;margin-left:6px"></span>
+          </h2>
+          <button class="btn btn-sm btn-secondary" onclick="cargarAlumnos()"
+            style="margin-left:auto" title="Recargar">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="1 4 1 10 7 10"/>
+              <path d="M3.51 15a9 9 0 1 0 .49-3.74"/>
+            </svg>
+          </button>
+        </div>
+        <div id="tabla-area">
+          <div class="loader"><div class="spinner"></div>Cargando alumnos…</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Endpoints info -->
+    <div class="card mt-2">
+      <div class="card-header">
+        <div class="dot"></div>
+        <h2>Referencia de la API — <code style="font-size:.85em">/api/alumnos</code></h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Método</th><th>Endpoint</th><th>Descripción</th><th>Body / Params</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="Método"><span class="chip chip-success">POST</span></td>
+              <td data-label="Endpoint"><code>/api/alumnos/list</code></td>
+              <td data-label="Descripción">Lista todos los alumnos</td>
+              <td data-label="Body / Params" class="text-muted text-small">{ carrera } (opcional)</td>
+            </tr>
+            <tr>
+              <td data-label="Método"><span class="chip chip-success">POST</span></td>
+              <td data-label="Endpoint"><code>/api/alumnos/get</code></td>
+              <td data-label="Descripción">Obtiene un alumno por ID</td>
+              <td data-label="Body / Params" class="text-muted text-small">{ id }</td>
+            </tr>
+            <tr>
+              <td data-label="Método"><span class="chip">POST</span></td>
+              <td data-label="Endpoint"><code>/api/alumnos/create</code></td>
+              <td data-label="Descripción">Crea un nuevo alumno</td>
+              <td data-label="Body / Params" class="text-muted text-small">{ nombre, email, carrera, anio, promedio }</td>
+            </tr>
+            <tr>
+              <td data-label="Método"><span class="chip chip-warning">POST</span></td>
+              <td data-label="Endpoint"><code>/api/alumnos/update</code></td>
+              <td data-label="Descripción">Actualiza un alumno</td>
+              <td data-label="Body / Params" class="text-muted text-small">{ id, nombre, email, ... }</td>
+            </tr>
+            <tr>
+              <td data-label="Método"><span class="chip chip-danger">POST</span></td>
+              <td data-label="Endpoint"><code>/api/alumnos/delete</code></td>
+              <td data-label="Descripción">Elimina un alumno</td>
+              <td data-label="Body / Params" class="text-muted text-small">{ id }</td>
+            </tr>
+            <tr>
+              <td data-label="Método"><span class="chip chip-success">POST</span></td>
+              <td data-label="Endpoint"><code>/api/stats</code></td>
+              <td data-label="Descripción">Estadísticas generales</td>
+              <td data-label="Body / Params" class="text-muted text-small">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="theme/context.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
