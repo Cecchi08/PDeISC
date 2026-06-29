@@ -1,0 +1,24 @@
+{
+  "name": "js5-alumnos-db",
+  "version": "1.0.0",
+  "description": "API REST con MySQL - Gestión de Alumnos",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "mysql",
+    "api",
+    "rest",
+    "express",
+    "alumnos"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mysql2": "^3.22.5"
+  }
+}
