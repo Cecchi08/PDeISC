@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --sans: 'Inter', system-ui, sans-serif;
+  --heading: 'Orbitron', sans-serif;
+  --neon: #00ff88;
+  --neon-dim: #00cc6a;
+  --neon-glow: rgba(0, 255, 136, 0.35);
+  --neon-glow-soft: rgba(0, 255, 136, 0.12);
+  --accent: #00e5ff;
+  --bg: #0a0e14;
+  --bg-card: rgba(15, 22, 30, 0.85);
+  --bg-input: rgba(10, 18, 26, 0.9);
+  --text: #c8d6e5;
+  --text-h: #e8f0f8;
+  --border: rgba(0, 255, 136, 0.2);
+  --border-hover: rgba(0, 255, 136, 0.5);
+  --danger: #ff4757;
+  --danger-glow: rgba(255, 71, 87, 0.3);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --transition: 0.3s ease;
+}
+
+[data-theme="light"] {
+  --bg: #eef2f7;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-input: rgba(255, 255, 255, 0.95);
+  --text: #2d3a4a;
+  --text-h: #0a0e14;
+  --border: rgba(0, 180, 100, 0.25);
+  --border-hover: rgba(0, 180, 100, 0.5);
+  --neon: #00b85c;
+  --neon-dim: #009a4d;
+  --neon-glow: rgba(0, 184, 92, 0.2);
+  --neon-glow-soft: rgba(0, 184, 92, 0.08);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 {
+  font-family: var(--heading);
+  color: var(--text-h);
+  letter-spacing: 1px;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--neon);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover {
+  border-color: var(--neon);
+  box-shadow: 0 0 16px var(--neon-glow);
+  transform: scale(1.1);
+}

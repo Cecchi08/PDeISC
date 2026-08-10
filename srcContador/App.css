@@ -1,0 +1,167 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.page-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--neon);
+  text-shadow: 0 0 20px var(--neon-glow);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text-h);
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.counter-card {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 80px 40px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.counter-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+}
+
+.counter-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow), 0 0 50px var(--neon-glow-soft);
+}
+
+.counter-display {
+  font-family: var(--heading);
+  font-size: clamp(6rem, 15vw, 12rem);
+  color: var(--neon);
+  text-shadow: 0 0 40px var(--neon-glow);
+  margin: 40px 0;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.counter-display.positive {
+  color: var(--neon);
+  text-shadow: 0 0 40px var(--neon-glow);
+}
+
+.counter-display.negative {
+  color: var(--danger);
+  text-shadow: 0 0 40px var(--danger-glow);
+}
+
+.counter-display.zero {
+  color: var(--text);
+  text-shadow: none;
+}
+
+.counter-label {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.counter-buttons {
+  display: flex;
+  gap: 24px;
+  margin-top: 40px;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.btn {
+  font-family: var(--heading);
+  font-size: 1.2rem;
+  padding: 20px 32px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--neon);
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+.btn:hover {
+  border-color: var(--neon);
+  box-shadow: 0 0 20px var(--neon-glow);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-decrement {
+  color: var(--danger);
+  border-color: rgba(255, 71, 87, 0.2);
+}
+
+.btn-decrement:hover {
+  border-color: var(--danger);
+  box-shadow: 0 0 20px var(--danger-glow);
+}
+
+.btn-reset {
+  color: var(--text);
+  font-size: 1rem;
+  padding: 16px 24px;
+  border-color: var(--border);
+  flex: 0 1 auto;
+}
+
+.btn-reset:hover {
+  color: var(--text-h);
+  border-color: var(--text);
+  box-shadow: 0 0 10px rgba(200, 214, 229, 0.15);
+}
+
+@media (max-width: 768px) {
+  .counter-buttons {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .counter-card {
+    padding: 40px 24px;
+  }
+}
