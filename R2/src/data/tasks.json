@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "titulo": "Diseñar interfaz de usuario",
+    "descripcion": "Crear los wireframes y mockups de alta fidelidad para la nueva aplicación móvil, incluyendo flujos de navegación y sistema de diseño completo.",
+    "fechaCreacion": "2026-08-15",
+    "completada": true
+  },
+  {
+    "id": 2,
+    "titulo": "Configurar base de datos",
+    "descripcion": "Establecer la estructura de tablas, relaciones e índices necesarios para el módulo de gestión de usuarios y autenticación del sistema.",
+    "fechaCreacion": "2026-08-16",
+    "completada": false
+  },
+  {
+    "id": 3,
+    "titulo": "Implementar autenticación",
+    "descripcion": "Desarrollar el sistema de login y registro con validación de credenciales, tokens JWT y manejo de sesiones persistentes.",
+    "fechaCreacion": "2026-08-17",
+    "completada": false
+  },
+  {
+    "id": 4,
+    "titulo": "Escribir tests unitarios",
+    "descripcion": "Cubrir con pruebas automatizadas los módulos críticos del backend, incluyendo servicios de usuario, middleware de auth y utilidades.",
+    "fechaCreacion": "2026-08-18",
+    "completada": true
+  },
+  {
+    "id": 5,
+    "titulo": "Optimizar rendimiento",
+    "descripcion": "Analizar y mejorar los tiempos de carga del frontend mediante lazy loading, compresión de assets y optimización de consultas al servidor.",
+    "fechaCreacion": "2026-08-19",
+    "completada": false
+  }
+]
